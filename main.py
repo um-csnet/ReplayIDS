@@ -1,3 +1,4 @@
+import os
 import yaml
 import numpy as np
 import torch
@@ -19,6 +20,7 @@ from src.strategies.replay import (
     print_buffer_distribution,
     ReplayDataset,
 )
+from src.strategies.cl_strategies import LwFState, EWCState, ICaRLState
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -27,6 +29,35 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 parser = argparse.ArgumentParser(description="Continual learning strategies")
 parser.add_argument(
     "--er", action="store_true", help="Enable Experience Replay strategy"
+)
+# --- Continual-learning strategies (mutually exclusive with --er and each other) ---
+strategy_group = parser.add_mutually_exclusive_group()
+strategy_group.add_argument(
+    "--lwf",
+    action="store_true",
+    default=False,
+    help="Enable Learning without Forgetting",
+)
+strategy_group.add_argument(
+    "--ewc",
+    action="store_true",
+    default=False,
+    help="Enable Elastic Weight Consolidation",
+)
+strategy_group.add_argument(
+    "--icarl", action="store_true", default=False, help="Enable iCaRL"
+)
+parser.add_argument(
+    "--ewc-lambda", type=float, default=1000.0, help="EWC penalty weight"
+)
+parser.add_argument(
+    "--lwf-alpha", type=float, default=0.5, help="LwF distillation weight"
+)
+parser.add_argument(
+    "--lwf-T", type=float, default=2.0, help="LwF distillation temperature"
+)
+parser.add_argument(
+    "--icarl-memory", type=int, default=2000, help="iCaRL exemplar budget"
 )
 parser.add_argument(
     "--mem",
@@ -78,12 +109,27 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-strategy = "er" if args.er else "naive"
+# --- Resolve strategy (er / lwf / ewc / icarl are mutually exclusive) ---
+if sum([args.er, args.lwf, args.ewc, args.icarl]) > 1:
+    parser.error("--er, --lwf, --ewc, --icarl are mutually exclusive; pick one.")
+
+if args.lwf:
+    strategy = "lwf"
+elif args.ewc:
+    strategy = "ewc"
+elif args.icarl:
+    strategy = "icarl"
+elif args.er:
+    strategy = "er"
+else:
+    strategy = "naive"
 memory_percentage = args.mem if args.er else 0
 scenario = args.scenario
 poisoning_lf = args.lf
 poisoning_mp = args.mp
-balanced = "True" if args.balanced else "False"
+balanced = (
+    args.balanced == "True"
+)  # args.balanced is a str; non-empty string is always truthy
 dataset_name = args.dataset
 
 seed = args.seed if args.seed else random.randint(1, 1000)
@@ -98,6 +144,8 @@ np.random.seed(seed)
 torch.manual_seed(seed)
 if torch.cuda.is_available():
     torch.cuda.manual_seed_all(seed)
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
 
 print(f"Strategy: {strategy}")
 print(f"Memory percentage: {memory_percentage}%")
@@ -187,8 +235,15 @@ model_config = config["model"]
 
 # init model for the first exp
 first_exp = scenario[0]
+# --- OUR FIX: global categorical vocab (shipped repo used exp-0-only -> OOB) ---
+_catidx = np.load(cat_idx_file).tolist()
+_allnp = np.concatenate(
+    [np.load(f"dataset/{dataset_name}/{s_}.npy") for s_ in ("train", "val", "test")]
+)
+GLOBAL_VOCAB = [int(_allnp[:, i].max()) + 1 for i in _catidx]
+print("GLOBAL_VOCAB (per categorical col):", GLOBAL_VOCAB)
 model = TabTransformer(
-    categories=first_exp.train_ds.vocab_sizes,
+    categories=GLOBAL_VOCAB,
     num_continuous=first_exp.train_ds.num_continuous_features,
     dim=model_config["dim"],
     depth=model_config["depth"],
@@ -227,19 +282,19 @@ def adjust_model(model, num_class_new_total, device):
 
     # sys.exit()
     new_head = nn.Linear(in_features, num_class_new_total, bias=has_bias)
-    """
+
     with torch.no_grad():
-        # Copy old weights and biases (if they exist)
+        # Copy old weights and biases (if they exist) to preserve old-class head
         new_head.weight[:num_class_old].copy_(old_head.weight)
         if has_bias:
             new_head.bias[:num_class_old].copy_(old_head.bias)
-        
+
         # Initialize new rows with Xavier uniform (better for final layer)
         nn.init.xavier_uniform_(new_head.weight[num_class_old:], gain=1.0)
-        
+
         # Initialize new biases to zero (better for softmax)
         if has_bias:
-            new_head.bias[num_class_old:].zero_()"""
+            new_head.bias[num_class_old:].zero_()
 
     # Replace the head and move to device
     model.mlp.mlp[-1] = new_head.to(device)
@@ -302,7 +357,7 @@ def compute_joint_oracle_metrics(scenario, all_classes, device, config):
 
     # Base feature schema from exp 0 (same across exps)
     base_ds = scenario[0].train_ds
-    base_vocab = base_ds.vocab_sizes
+    base_vocab = GLOBAL_VOCAB
     num_cont = base_ds.num_continuous_features
 
     for j in range(len(scenario)):
@@ -400,22 +455,35 @@ else:
 
 
 # ---- W&B ----
-wandb.init(
-    project=project_name,
-    config=dict(
-        strategy=strategy,
-        memory_percentage=memory_percentage,
-        scenario=args.scenario,
-        group=memory_percentage,
-        lr=config["learning_rate"],
-        batch_size=config["batch_size"],
-        epochs=config["epochs"],
-        dataset=dataset_name,
-        **model_config,
-        seed=seed,
-    ),
-    mode="online",
-)
+try:
+    wandb.init(
+        project=project_name,
+        config=dict(
+            strategy=strategy,
+            memory_percentage=memory_percentage,
+            scenario=args.scenario,
+            group=memory_percentage,
+            lr=config["learning_rate"],
+            batch_size=config["batch_size"],
+            epochs=config["epochs"],
+            dataset=dataset_name,
+            **model_config,
+            seed=seed,
+        ),
+        mode=os.environ.get("WANDB_MODE", "online"),
+    )
+except Exception as _wandb_err:
+    print(f"[wandb disabled: {_wandb_err}]")
+    from unittest.mock import MagicMock
+
+    def _noop(*args, **kwargs):
+        return None
+
+    wandb.log = _noop
+    wandb.define_metric = _noop
+    wandb.finish = _noop
+    wandb.plot = MagicMock()
+    wandb.Image = MagicMock()
 
 
 seen_classes_set = set()
@@ -439,6 +507,18 @@ best_f1_so_far = np.full(num_exps, 0, dtype=np.float32)
 if strategy == "er":
     replay_buffer = []
     val_replay_buffer = []
+
+# --- CL strategy state (guarded; only one is ever active) ---
+lwf_state = LwFState(alpha=args.lwf_alpha, T=args.lwf_T) if strategy == "lwf" else None
+ewc_state = EWCState(ewc_lambda=args.ewc_lambda) if strategy == "ewc" else None
+icarl_state = ICaRLState(memory=args.icarl_memory) if strategy == "icarl" else None
+
+if strategy == "lwf":
+    print(f"LwF: alpha={args.lwf_alpha}, T={args.lwf_T}")
+elif strategy == "ewc":
+    print(f"EWC: lambda={args.ewc_lambda}")
+elif strategy == "icarl":
+    print(f"iCaRL: exemplar budget K={args.icarl_memory}")
 
 
 for exp in scenario:
@@ -471,24 +551,83 @@ for exp in scenario:
         val_loader = create_dataloader(
             exp.val_ds, shuffle=False, replay_buffer=val_replay_buffer, exp_id=exp_id
         )
+    elif strategy == "icarl":
+        # iCaRL interleaves its herded exemplars into the current experience's train set
+        train_source = exp.train_ds
+        if icarl_state.exemplars:
+            ex_ds = icarl_state.exemplar_dataset()
+            print(
+                f"--- iCaRL: training with {len(ex_ds)} exemplars from previous classes ---"
+            )
+            train_source = torch.utils.data.ConcatDataset([exp.train_ds, ex_ds])
+        train_loader = DataLoader(
+            train_source,
+            batch_size=batch_size,
+            shuffle=True,
+            num_workers=16,
+            pin_memory=True,
+            persistent_workers=True,
+        )
+        val_loader = create_dataloader(exp.val_ds, shuffle=False, exp_id=exp_id)
     else:
         train_loader = create_dataloader(exp.train_ds, shuffle=True, exp_id=exp_id)
         val_loader = create_dataloader(exp.val_ds, shuffle=False, exp_id=exp_id)
+
+    # --- Build strategy-specific aux loss / criterion (guarded) ---
+    aux_loss_fn = None
+    train_criterion = criterion
+    val_criterion = None
+    n_out = model.mlp.mlp[-1].out_features
+
+    if strategy == "lwf":
+        aux_loss_fn = lwf_state.make_aux_loss_fn(device)
+        if aux_loss_fn is not None:
+            print(
+                f"LwF: distilling old-class logits {lwf_state.seen_before} "
+                f"(alpha={lwf_state.alpha}, T={lwf_state.T})"
+            )
+    elif strategy == "ewc":
+        aux_loss_fn = ewc_state.make_aux_loss_fn(device)
+        if aux_loss_fn is not None:
+            print(f"EWC: applying penalty over {len(ewc_state.tasks)} stored task(s)")
+    elif strategy == "icarl":
+        # Whole training loss is BCE-with-distillation -> zero out CE, keep CE for val.
+        aux_loss_fn = icarl_state.make_aux_loss_fn(n_out, device)
+
+        def train_criterion(logits, labels):
+            return torch.zeros((), device=logits.device)
+
+        val_criterion = criterion
 
     best_state = train_model(
         model,
         train_loader,
         val_loader,
         device,
-        criterion,
+        train_criterion,
         optimizer,
         scheduler,
         max_epochs,
         exp,
         dataset_name=dataset_name,
+        aux_loss_fn=aux_loss_fn,
+        val_criterion=val_criterion,
     )
     # sys.exit()
     model.load_state_dict(best_state)
+
+    # --- Consolidate strategy state AFTER training this experience (guarded) ---
+    if strategy == "lwf":
+        lwf_state.update(model, seen_classes_set)
+        print(f"LwF: teacher frozen; seen classes now {lwf_state.seen_before}")
+    elif strategy == "ewc":
+        ewc_state.consolidate(model, exp.train_ds, device, criterion, seed=seed)
+        print(
+            f"EWC: stored Fisher for {len(ewc_state.tasks)} task(s), "
+            f"lambda={args.ewc_lambda:g}"
+        )
+    elif strategy == "icarl":
+        icarl_state.update(model, exp, device)
 
     # --- Update replay buffer (if using ER) ---
     if strategy == "er":
@@ -615,7 +754,12 @@ for exp in scenario:
         # test_and_report(model, test_loader, device, all_classes, task_indices=class_group)
 
         report_single, y_true, y_pred = test_and_report(
-            model, test_loader, device, all_classes, task_indices=class_group
+            model,
+            test_loader,
+            device,
+            all_classes,
+            task_indices=class_group,
+            predict_fn=(icarl_state.predict if strategy == "icarl" else None),
         )
 
         acc, mf1 = from_report(report_single)
@@ -657,7 +801,12 @@ for exp in scenario:
     test_loader = create_dataloader(concat_test, shuffle=False)
     # print("tHIS IS SEEN CLASS names:", all_classes)
     overall_report, y_true_all, y_pred_all = test_and_report(
-        model, test_loader, device, all_classes, task_indices=seen_classes_list
+        model,
+        test_loader,
+        device,
+        all_classes,
+        task_indices=seen_classes_list,
+        predict_fn=(icarl_state.predict if strategy == "icarl" else None),
     )
     overall_acc, overall_macro_f1 = from_report(overall_report)
     overall_accuracy_matrix[exp_id] = overall_acc

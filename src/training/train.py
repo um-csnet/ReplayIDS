@@ -1,4 +1,5 @@
 import torch
+import os
 from tqdm.auto import tqdm
 import wandb
 from sklearn.metrics import classification_report, confusion_matrix
@@ -19,12 +20,18 @@ def train_model(
     exp,
     oracle=False,
     dataset_name="CICIDS2017",
+    aux_loss_fn=None,
+    val_criterion=None,
 ):
+    # val_criterion lets a strategy (iCaRL) train with a BCE aux loss while still
+    # early-stopping on a meaningful CE validation loss. Defaults to `criterion`.
+    if val_criterion is None:
+        val_criterion = criterion
     best_val = float("inf")
     no_improve = 0
     patience = 10
     if not oracle:
-        model_path = f"model/CL_{dataset_name}_Exp_{exp.exp_id}.pth"
+        model_path = f"model/CL_{os.environ.get('RUN_TAG', '')}{dataset_name}_Exp_{exp.exp_id}.pth"
         wandb.define_metric(
             step_metric="Epoch", name=f"Training/exp_{exp.exp_id}/train_loss"
         )
@@ -33,7 +40,7 @@ def train_model(
         )
         wandb.define_metric(step_metric="Epoch", name=f"Training/exp_{exp.exp_id}/lr")
     else:
-        model_path = f"model/CL_{dataset_name}_oracle_{exp.exp_id}.pth"
+        model_path = f"model/CL_{os.environ.get('RUN_TAG', '')}{dataset_name}_oracle_{exp.exp_id}.pth"
         wandb.define_metric(
             step_metric="Epoch", name=f"Training/oracle_{exp.exp_id}/train_loss"
         )
@@ -48,6 +55,7 @@ def train_model(
     for epoch in range(1, num_epoch + 1):
         model.train()
         tot, n = 0.0, 0
+        _step = 0
         for (x_categ, x_cont), y in tqdm(
             train_loader, desc=f"Exp {exp.exp_id} | Epoch {epoch}/{num_epoch}"
         ):
@@ -56,6 +64,20 @@ def train_model(
             optimizer.zero_grad(set_to_none=True)
             logits = model(x_categ, x_cont)
             loss = criterion(logits, y)
+            if aux_loss_fn is not None:
+                aux = aux_loss_fn(model, logits, x_categ, x_cont, y)
+                loss = loss + aux
+                _step += 1
+                if _step % 200 == 1:
+                    aux_v = (
+                        float(aux.detach().item())
+                        if torch.is_tensor(aux)
+                        else float(aux)
+                    )
+                    print(
+                        f"    [aux] Exp {exp.exp_id} step {_step}: "
+                        f"ce+base={float(criterion(logits, y).detach().item()):.4f} aux={aux_v:.6f}"
+                    )
             loss.backward()
             optimizer.step()
 
@@ -64,7 +86,7 @@ def train_model(
             n += bs  # Find average loss per batch
         train_loss = tot / max(1, n)
 
-        val_loss = evaluate_model(model, val_loader, device, criterion)
+        val_loss = evaluate_model(model, val_loader, device, val_criterion)
         # scheduler.step() # CosineAnnealingLR
         scheduler.step(val_loss)  # ReduceLROnPlateau
         print(
@@ -128,10 +150,16 @@ def evaluate_model(model, val_loader, device, criterion):
     return val_loss
 
 
-def test_and_report(model, test_loader, device, class_names, task_indices=None):
+def test_and_report(
+    model, test_loader, device, class_names, task_indices=None, predict_fn=None
+):
     """
     Evaluates a model on the test set and prints a classification report
     and confusion matrix.
+
+    predict_fn: optional callable (model, x_categ, x_cont, device) -> preds tensor.
+    When provided (e.g. iCaRL nearest-mean-of-exemplars), it REPLACES the default
+    argmax-over-logits classifier. All existing (softmax) callers pass None.
     """
     # print("\n--- Starting Final Test ---")
     model.eval()
@@ -140,9 +168,11 @@ def test_and_report(model, test_loader, device, class_names, task_indices=None):
     with torch.inference_mode():
         for (cat, cont), labels in test_loader:
             cat, cont, labels = cat.to(device), cont.to(device), labels.to(device)
-            predictions = model(cat, cont)
-
-            preds = torch.argmax(predictions, dim=1)
+            if predict_fn is not None:
+                preds = predict_fn(model, cat, cont, device)
+            else:
+                predictions = model(cat, cont)
+                preds = torch.argmax(predictions, dim=1)
 
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
