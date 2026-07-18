@@ -1,0 +1,30 @@
+name: Reproducibility Contract
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  artifact-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install Python
+        run: uv python install 3.12.4
+      - name: Install locked environment
+        run: uv sync --frozen
+      - name: Verify manifests without running GPUs
+        run: |
+          uv run python scripts/run_experiments.py --manifest configs/experiments/eaai-primary.yaml --dry-run
+          uv run python scripts/run_experiments.py --manifest configs/experiments/eaai-attacks.yaml --dry-run
+      - name: Rebuild paper tables and figures
+        run: |
+          uv run python analysis/build_paper_results.py
+          uv run python analysis/plot_paper_results.py
+          uv run python analysis/verify_eaai_mapping.py
+      - name: Run reproducibility tests
+        run: uv run pytest tests/test_reproducibility_contract.py

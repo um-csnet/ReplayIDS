@@ -1,0 +1,43 @@
+dataset: CICIDS2017
+source:
+  publisher: Canadian Institute for Cybersecurity, University of New Brunswick
+  url: https://www.unb.ca/cic/datasets/ids-2017.html
+  archive: GeneratedLabelledFlows.zip
+raw_files:
+  - Monday-WorkingHours.pcap_ISCX.csv
+  - Tuesday-WorkingHours.pcap_ISCX.csv
+  - Wednesday-workingHours.pcap_ISCX.csv
+label_column: Label
+preprocessing:
+  duplicate_policy: retain
+  invalid_numeric_policy: replace_with_zero
+classes:
+  BENIGN: 0
+  DoS GoldenEye: 1
+  DoS Hulk: 2
+  DoS Slowhttptest: 3
+  DoS slowloris: 4
+  FTP-Patator: 5
+  Heartbleed: 6
+  SSH-Patator: 7
+expected:
+  merged_rows: 1138612
+  feature_count: 78
+  class_counts:
+    0: 872105
+    1: 10293
+    2: 231073
+    3: 5499
+    4: 5796
+    5: 7938
+    6: 11
+    7: 5897
+  split_shapes:
+    train: [683167, 79]
+    val: [227722, 79]
+    test: [227723, 79]
+split:
+  train_fraction: 0.60
+  validation_fraction: 0.20
+  test_fraction: 0.20
+  seed: 42

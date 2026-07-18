@@ -53,11 +53,18 @@ coverage.xml
 .DS_Store
 Thumbs.db
 
-# Data
+# Data generated locally from CICIDS2017
+raw/
 dataset/
 preprocess_csv/
 *.npy
+
+# Result CSVs are small, versioned research artifacts. Ignore ad-hoc CSVs
+# elsewhere, but keep the canonical paper and benchmark outputs.
 *.csv
+!results/**/*.csv
+!benchmarks/**/results/*.csv
+!benchmarks/**/results/**/*.csv
 
 # Weights & Biases
 wandb/
@@ -65,6 +72,14 @@ wandb/
 # Logs
 *.log
 tb_data/
+
+# Reproduction runs can be large and are generated on demand. The compact
+# EAAI reference artifacts under results/eaai-reported remain versioned.
+results/runs/
+results/generated/
+results/rerun-primary/
+results/rerun-generated/
+results/corrected/
 
 # Model checkpoints
 model/

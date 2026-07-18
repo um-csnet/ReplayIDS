@@ -1,0 +1,19 @@
+schema_version: 1
+name: eaai-primary
+description: Primary TabTransformer experiments reported in EAAI Tables 6-9.
+defaults:
+  scenario: 1
+  seed: 42
+  env:
+    WANDB_MODE: disabled
+runs:
+  - matrix:
+      strategy: [naive, ewc, lwf, icarl]
+      scenario: [1, 2]
+  - matrix:
+      strategy: [er_stratified, er_balanced]
+      scenario: [1, 2]
+      memory: [1, 5, 10]
+  - matrix:
+      strategy: [oracle]
+      scenario: [1, 2]

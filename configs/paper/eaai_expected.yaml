@@ -1,0 +1,78 @@
+paper:
+  title: Adaptive Intrusion Detection System using Transformer-Based Neural Networks and Continual Learning Approach with Adversarial Investigation
+  source_of_truth: latex-eaai/main.tex
+  build_date: 2026-07-18
+  oracles:
+    CI: {accuracy: 0.9997, macro_f1: 0.9979}
+    CII: {accuracy: 0.9955, macro_f1: 0.9795}
+
+# Tables 6-9 are generated from results/eaai-reported/primary. Tables 10-12
+# preserve the values printed in the EAAI LaTeX output and are verified by the
+# result builder. Tables 13-14 are generated from the bundled benchmark CSVs.
+tables:
+  table_03:
+    kind: preprocessing
+    generator: scripts/prepare_cicids2017.py
+    expected_total_rows: 1138612
+    expected_classes: 8
+    paper_declared_preprocessing: drop_invalid_and_deduplicate
+    released_data_preprocessing: retain_duplicates_and_replace_invalid_with_zero
+  table_04:
+    kind: scenario
+    generator: src/data/ci_builder.py
+    expected:
+      - {experience: 0, ci: [0, 1], cii: [0, 1]}
+      - {experience: 1, ci: [2, 3], cii: [0, 2, 3]}
+      - {experience: 2, ci: [4, 5], cii: [0, 4, 5]}
+      - {experience: 3, ci: [6, 7], cii: [0, 6, 7]}
+  table_05:
+    kind: configuration
+    source: configs/config.yaml
+    paper_declared_epoch_cap: 100
+    released_run_epoch_cap: 8
+    early_stop_patience: 10
+  table_06:
+    kind: primary_ci
+    source: results/eaai-reported/primary
+  table_07:
+    kind: primary_cii_checkpoint_average
+    source: results/eaai-reported/primary
+  table_08:
+    kind: primary_cii_final_checkpoint
+    source: results/eaai-reported/primary/per_experience.csv
+  table_09:
+    kind: derived_forgetting_intransigence
+    source: results/eaai-reported/primary
+  table_10:
+    kind: label_flip
+    expected:
+      - {budget: 0, accuracy: 0.9995, macro_f1: 0.9957, forgetting_acc: 0.0007, forgetting_f1: 0.0025, intransigence_acc: 0.0003, intransigence_f1: 0.0022}
+      - {budget: 1, accuracy: 0.0053, macro_f1: 0.2074, forgetting_acc: 0.9987, forgetting_f1: 0.9963, intransigence_acc: 0.9945, intransigence_f1: 0.7904}
+      - {budget: 5, accuracy: 0.0052, macro_f1: 0.2244, forgetting_acc: 0.9990, forgetting_f1: 0.9966, intransigence_acc: 0.9946, intransigence_f1: 0.7734}
+      - {budget: 10, accuracy: 0.0052, macro_f1: 0.2077, forgetting_acc: 0.9992, forgetting_f1: 0.9973, intransigence_acc: 0.9946, intransigence_f1: 0.7902}
+  table_11:
+    kind: backdoor_aggregate
+    expected:
+      - {budget: 0, accuracy: 0.9995, macro_f1: 0.9957, forgetting_acc: 0.0007, forgetting_f1: 0.0025, intransigence_acc: 0.0003, intransigence_f1: 0.0022}
+      - {budget: 1, accuracy: 0.9992, macro_f1: 0.9679, forgetting_acc: 0.0020, forgetting_f1: 0.0054, intransigence_acc: 0.0005, intransigence_f1: 0.0299}
+      - {budget: 5, accuracy: 0.9982, macro_f1: 0.9047, forgetting_acc: 0.0013, forgetting_f1: 0.0127, intransigence_acc: 0.0015, intransigence_f1: 0.0931}
+      - {budget: 10, accuracy: 0.9776, macro_f1: 0.8933, forgetting_acc: 0.0195, forgetting_f1: 0.0216, intransigence_acc: 0.0221, intransigence_f1: 0.1046}
+  table_12:
+    kind: backdoor_asr_historical
+    source: results/eaai-reported/asr-logs
+    expected:
+      - {budget: 1, experience: 1, target: DoS GoldenEye, asr_percent: 150.0, flagged: true}
+      - {budget: 1, experience: 2, target: DoS slowloris, asr_percent: 100.0, flagged: false}
+      - {budget: 1, experience: 3, target: DoS GoldenEye, asr_percent: 220.0, flagged: true}
+      - {budget: 5, experience: 1, target: DoS Slowhttptest, asr_percent: 100.0, flagged: false}
+      - {budget: 5, experience: 2, target: DoS GoldenEye, asr_percent: 95.1, flagged: false}
+      - {budget: 5, experience: 3, target: DoS GoldenEye, asr_percent: 199.0, flagged: true}
+      - {budget: 10, experience: 1, target: DoS Slowhttptest, asr_percent: 96.4, flagged: false}
+      - {budget: 10, experience: 2, target: DoS GoldenEye, asr_percent: 95.6, flagged: false}
+      - {budget: 10, experience: 3, target: DoS Hulk, asr_percent: 100.0, flagged: false}
+  table_13:
+    kind: cross_architecture_ci
+    source: benchmarks/cross_architecture/results/summary_ci.csv
+  table_14:
+    kind: cross_architecture_cii
+    source: benchmarks/cross_architecture/results/summary_cii.csv

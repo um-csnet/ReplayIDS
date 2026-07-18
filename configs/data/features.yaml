@@ -1,0 +1,33 @@
+# Feature names are authoritative. Numeric .npy index files are generated from
+# the validated CICIDS2017 header so column reordering cannot silently corrupt
+# an experiment.
+categorical:
+  - Destination Port
+  - Bwd PSH Flags
+  - Fwd URG Flags
+  - Bwd URG Flags
+  - Fwd Header Length
+  - FIN Flag Count
+  - SYN Flag Count
+  - RST Flag Count
+  - PSH Flag Count
+  - ACK Flag Count
+  - URG Flag Count
+  - CWE Flag Count
+  - ECE Flag Count
+
+backdoor_iat:
+  - Flow IAT Mean
+  - Flow IAT Std
+  - Flow IAT Max
+  - Flow IAT Min
+  - Fwd IAT Total
+  - Fwd IAT Mean
+  - Fwd IAT Std
+  - Fwd IAT Max
+  - Fwd IAT Min
+  - Bwd IAT Total
+  - Bwd IAT Mean
+  - Bwd IAT Std
+  - Bwd IAT Max
+  - Bwd IAT Min

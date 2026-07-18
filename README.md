@@ -1,565 +1,372 @@
-# Continual Learning for Intrusion Detection Systems (IDS)
+# ReplayIDS
 
-A PyTorch implementation of continual learning strategies for Network Intrusion Detection Systems (NIDS). This repository implements **Experience Replay (ER)** with **dynamic head expansion** to address catastrophic forgetting in sequential learning scenarios.
+[![Python 3.12.4](https://img.shields.io/badge/Python-3.12.4-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.6+-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Python 3.12.4](https://img.shields.io/badge/python-3.12.4-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.6.0+-ee4c2c.svg)](https://pytorch.org/)
-[![CI](https://github.com/afifhaziq/Continual-IDS-TabTransformer/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/afifhaziq/Continual-IDS-TabTransformer/actions/workflows/ci.yml)
-[![Unit Tests](https://github.com/afifhaziq/Continual-IDS-TabTransformer/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/afifhaziq/Continual-IDS-TabTransformer/actions/workflows/test.yml)
-[![Security Scan](https://github.com/afifhaziq/Continual-IDS-TabTransformer/actions/workflows/security.yml/badge.svg?branch=main)](https://github.com/afifhaziq/Continual-IDS-TabTransformer/actions/workflows/security.yml)
+Self-reproducible implementation and EAAI artifact package for:
 
+> **Adaptive Intrusion Detection System using Transformer-Based Neural Networks
+> and Continual Learning Approach with Adversarial Investigation**
 
-## Table of Contents
+ReplayIDS evaluates a TabTransformer intrusion detector on CICIDS2017 under
+class-incremental (CI) and class-instance incremental (CII) streams. It includes
+six continual-learning methods, two replay-buffer attacks, a joint-training
+oracle, and the independent cross-architecture benchmark reported in the paper.
 
-- [Overview](#overview)
-- [Features](#features)
-- [Continual Learning Strategies](#continual-learning-strategies)
-  - [Naive (Baseline)](#1-naive-baseline)
-  - [Experience Replay (ER)](#2-experience-replay-er)
-  - [Dynamic Head Expansion](#3-dynamic-head-expansion)
-- [Scenarios](#scenarios)
-  - [Scenario 1: Class Incremental (CI)](#scenario-1-class-incremental-ci)
-  - [Scenario 2: Class-Instance Incremental (CII)](#scenario-2-class-instance-incremental-cii)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Dataset Preparation](#dataset-preparation)
-- [Configuration](#configuration)
-  - [Training Configuration](#training-configuration)
-  - [Model Configuration](#model-configuration)
-- [Usage](#usage)
-  - [Basic Commands](#basic-commands)
-  - [Command-Line Arguments](#command-line-arguments)
-- [Testing](#testing)
-- [Evaluation Metrics](#evaluation-metrics)
-- [Project Structure](#project-structure)
-- [Weights & Biases Logging](#weights--biases-logging)
-- [CI/CD](#cicd)
-- [License](#license)
-- [Contact](#contact)
+Repository: <https://github.com/um-csnet/ReplayIDS>
 
-## Overview
+## What this repository reproduces
 
-This repository addresses the challenge of **catastrophic forgetting** in intrusion detection systems when models learn from sequential data streams. The implementation uses a **TabTransformer** architecture combined with continual learning strategies to maintain performance on previously learned attack classes while adapting to new threats.
+- Naive sequential fine-tuning
+- Elastic Weight Consolidation (EWC)
+- Learning without Forgetting (LwF)
+- iCaRL
+- ER-Stratified
+- ER-Balanced with benign anchoring
+- Label flipping of replay-buffer exemplars
+- Timing-feature backdoor poisoning and historical ASR analysis
+- MLP, SGM-CNN and FT-Transformer cross-architecture benchmark
+- EAAI Tables 2-14 and numerical Figures 4 and 7-10
 
-## Project Structure
+See [the complete EAAI paper map](docs/PAPER_MAP.md).
 
-```
-Continual-IDS-TabTransformer/
-├── main.py                      # Main training pipeline and experience loop
-├── tab-preprocessing.py         # Data preprocessing script for raw datasets
-├── src/                         # Source code modules
-│   ├── __init__.py
-│   ├── data/                    # Data processing modules
-│   │   ├── __init__.py
-│   │   ├── preprocess.py        # Dataset preprocessing and data loaders
-│   │   └── ci_builder.py        # Continual learning scenario builder
-│   ├── training/                # Training modules
-│   │   ├── __init__.py
-│   │   └── train.py             # Training, evaluation, and testing functions
-│   └── strategies/              # Continual learning strategies
-│       ├── __init__.py
-│       ├── replay.py            # Experience Replay buffer management
-│       └── attack.py            # Poisoning attack implementations 
-├── configs/                     # Configuration files
-│   ├── config.yaml              # Training configuration and dataset specs
-│   └── sweep.yaml               # Weights & Biases sweep configuration
-├── preprocess_csv/              # Raw dataset files (user provided)
-│   └── CICIDS2017/              # CICIDS2017 dataset directory
-│       └── .gitkeep             # Placeholder for directory structure
-├── dataset/                     # Processed datasets (generated by tab-preprocessing.py)
-│   └── CICIDS2017/              # Processed CICIDS2017 data
-│       ├── train.npy
-│       ├── val.npy
-│       ├── test.npy
-│       └── catfeaturelist.npy
-├── pyproject.toml               # Project dependencies (uv package manager)
-├── uv.lock                      # Locked dependency versions
-├── .gitignore                   # Git ignore rules
-└── README.md                    # This file
+## Repository layout
+
+```text
+configs/
+  data/                  CICIDS2017 schema and feature contracts
+  experiments/           primary, attack and cross-architecture manifests
+  paper/                 machine-readable EAAI result contract
+docs/
+  DATA.md                dataset acquisition and validation
+  PIPELINE.md            end-to-end reproduction workflow
+  PAPER_MAP.md           EAAI table/figure -> artifact mapping
+scripts/
+  prepare_cicids2017.py  deterministic raw-data builder
+  run_experiments.py     portable manifest runner
+  local/                 optional UM multi-GPU orchestration examples
+analysis/
+  result_io.py           log -> structured metrics
+  export_run_summaries.py rerun artifacts -> paper-builder inputs
+  build_paper_results.py canonical table bundle generator
+  plot_paper_results.py  deterministic SVG figure generator
+  verify_eaai_mapping.py mapping completeness check
+results/
+  eaai-reported/         compact released results and raw ASR logs
+benchmarks/
+  cross_architecture/    independent Tables 13-14 benchmark
+src/                     primary ReplayIDS implementation
+tests/                   unit and integration tests
+main.py                  primary training entry point
 ```
 
-### Key Contributions
-
-- **Experience Replay (ER)**: Memory buffer strategy to retain past knowledge
-- **Dynamic Head Expansion**: Incremental output layer growth for new classes
-- **Two Realistic Scenarios**: Class Incremental (CI) and Class-Instance Incremental (CII) learning
-- **Comprehensive Evaluation**: Single-experience and overall performance metrics including Accuracy, F1-score, BWT, FWT, and Intransigence
-
-## Features
-
-- **Experience Replay** with configurable memory budget (5%, 10%, 20%)
-- **Two continual learning scenarios**: Class Incremental (CI) and Class-Instance Incremental (CII)
-- **TabTransformer** architecture for tabular network traffic data
-- **Dynamic head expansion** for incremental class learning
-- **Comprehensive metrics**: Accuracy, F1-score, Backward Transfer (BWT), Forward Transfer (FWT), Intransigence
-- **Reproducible experiments** with seed control
-- **Weights & Biases integration** for experiment tracking and visualization
-- **Balanced/Percentage-based sampling** for replay buffer
-- **Oracle training mode** for upper-bound performance analysis
-
-## Continual Learning Strategies
-
-### 1. Naive (Baseline)
-
-**No replay, sequential fine-tuning**
-
-The naive strategy trains the model sequentially on each experience without any memory mechanism. This serves as a baseline to measure catastrophic forgetting. Default scenario: 1.
-
-**Usage:**
-```bash
-uv run main.py
-```
-
-### 2. Experience Replay (ER)
-
-**Memory-based continual learning**
-
-Experience Replay maintains a buffer of past samples and replays them during training on new experiences. We implement the buffer in training and validation set for consistent observation in loss.
-
-**Characteristics:**
-- Maintains replay buffer with configurable memory budget
-- Samples stored per-class from all seen experiences
-- Buffer rebuilt after each experience
-- Two sampling modes. Default --balanced False:
-  - **Percentage-based**: Keep N% of samples from each class.
-  - **Balanced**: Equal samples per class based on the N% of training set. 
-
-**Memory Budget:**
-The `--mem` parameter controls buffer size as a percentage of total samples seen:
-- `--mem 5`: Keep 5% of samples from each class
-- `--mem 10`: Keep 10% of samples from each class
-- `--mem 20`: Keep 20% of samples from each class
-
-`Note: --mem needs --er flag to be enabled for code to work.`
-
-**Usage:**
-```bash
-# Percentage-based sampling (10% memory)
-uv run main.py --er --mem 10 --scenario 2
-
-# Balanced sampling (equal samples per class)
-uv run main.py --er --mem 10 --scenario 2 --balanced True
-```
-
-### 3. Dynamic Head Expansion
-
-**Incremental classifier adaptation**
-
-The model dynamically expands its output layer as new classes arrive, allowing incremental learning without architectural constraints.
-
-**How it works:**
-1. Model starts with initial output dimension for first experience classes
-2. When new classes arrive, the final linear layer is expanded
-3. New output neurons are randomly initialized
-4. Previous neurons retain their learned weights
-5. All parameters (including old outputs) are fine-tuned
-
-**Implementation:**
-```python
-def adjust_model(model, num_class_new_total, device):
-    """
-    Expands the model's classifier head to support more classes.
-    """
-    old_head = model.mlp.mlp[-1]
-    in_features = old_head.in_features
-    num_class_old = old_head.out_features
-    
-    if num_class_new_total <= num_class_old:
-        return model  # No expansion needed
-    
-    # Create new head with expanded output
-    new_head = nn.Linear(in_features, num_class_new_total, bias=True)
-    model.mlp.mlp[-1] = new_head.to(device)
-    return model
-```
-
-This approach is automatically applied in both naive and ER strategies whenever new classes are encountered.
-
-## Scenarios
-
-### Scenario 1: Class Incremental (CI)
-
-**Benign class appears only in the first experience**
-
-Simulates a scenario where normal traffic is initially observed, followed by sequential attack classes.
-
-**Experience Distribution (CICIDS2017):**
-- **Exp 0:** Classes [0, 1] - Benign + DoS GoldenEye
-- **Exp 1:** Classes [2, 3] - DoS Hulk + DoS Slowhttptest
-- **Exp 2:** Classes [4, 5] - DoS slowloris + FTP-Patator
-- **Exp 3:** Classes [6, 7] - Heartbleed + SSH-Patator
-
-**Usage:**
-```bash
-uv run main.py --scenario 1
-```
-
-### Scenario 2: Class-Instance Incremental (CII)
-
-**Benign class split across all experiences**
-
-Realistic IDS scenario where benign traffic appears continuously alongside new attack types.
-
-**Experience Distribution (CICIDS2017):**
-- **Exp 0:** Classes [0, 1] - Benign + DoS GoldenEye
-- **Exp 1:** Classes [0, 2, 3] - Benign + DoS Hulk + DoS Slowhttptest
-- **Exp 2:** Classes [0, 4, 5] - Benign + DoS slowloris + FTP-Patator
-- **Exp 3:** Classes [0, 6, 7] - Benign + Heartbleed + SSH-Patator
-
-**Usage:**
-```bash
-uv run main.py --scenario 2
-```
+Raw data, generated arrays, checkpoints and full rerun directories are ignored
+because they are large. Compact paper CSVs and provenance artifacts are tracked.
 
 ## Requirements
 
+- Linux recommended
 - Python 3.12.4
-- CUDA-capable GPU (recommended but optional)
-- [uv](https://github.com/astral-sh/uv) package manager
+- [`uv`](https://docs.astral.sh/uv/)
+- CUDA-capable NVIDIA GPU recommended for the full matrix
+- Approximately 8 GB free space for raw and prepared CICIDS2017 data
 
-### Core Dependencies
+CPU execution is supported but the full experiment matrix is impractically slow.
+Weights & Biases is optional and disabled in all official manifests.
 
-```toml
-torch >= 2.6.0
-tab-transformer-pytorch >= 0.4.2
-numpy
-scikit-learn
-pandas >= 2.3.2
-pyyaml >= 6.0.2
-wandb >= 0.21.3
-avalanche-lib >= 0.6.0
-tqdm
-```
-
-See `pyproject.toml` for complete dependency list.
-
-## Installation
-
-### 1. Install uv (if not already installed)
+## 1. Install the exact environment
 
 ```bash
-# On macOS and Linux
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# On Windows
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+git clone https://github.com/um-csnet/ReplayIDS.git
+cd ReplayIDS
+uv sync --frozen
 ```
 
-### 2. Clone the repository
+The committed `uv.lock` is the dependency source of truth.
+
+## 2. Download CICIDS2017
+
+Download `GeneratedLabelledFlows.zip` from the
+[University of New Brunswick CICIDS2017 page](https://www.unb.ca/cic/datasets/ids-2017.html).
+
+Extract these files into one directory:
+
+```text
+Monday-WorkingHours.pcap_ISCX.csv
+Tuesday-WorkingHours.pcap_ISCX.csv
+Wednesday-workingHours.pcap_ISCX.csv
+```
+
+Thursday and Friday are not used because their attack classes are outside the
+paper's eight-class label space. See [the full data contract](docs/DATA.md).
+
+## 3. Rebuild and verify the dataset
 
 ```bash
-git clone Continual-IDS-TabTransformer
-cd Continual-IDS-TabTransformer
+uv run python scripts/prepare_cicids2017.py \
+  --raw-dir /path/to/GeneratedLabelledFlows
+
+uv run python scripts/prepare_cicids2017.py --verify-only
 ```
 
-### 3. Install dependencies using uv
+The builder performs all previously manual steps:
+
+- validates the three required files and schema;
+- maps the eight classes;
+- checks expected row and class counts;
+- replaces infinities/NaNs consistently;
+- creates the seeded stratified 60/20/20 split;
+- generates categorical and IAT feature indices by column name;
+- copies the six required `.npy` files into `dataset/CICIDS2017/`;
+- writes hashes and distributions to `data_report.json`.
+
+Expected shapes:
+
+| Split | Shape |
+|---|---:|
+| Train | `(683167, 79)` |
+| Validation | `(227722, 79)` |
+| Test | `(227723, 79)` |
+
+## 4. Inspect the official experiment matrix
+
+Dry-run commands before using GPU time:
 
 ```bash
-uv sync
+uv run python scripts/run_experiments.py \
+  --manifest configs/experiments/eaai-primary.yaml \
+  --dry-run
+
+uv run python scripts/run_experiments.py \
+  --manifest configs/experiments/eaai-attacks.yaml \
+  --dry-run
 ```
 
-This will automatically create a virtual environment in `.venv` folder and install all required dependencies based on `pyproject.toml`.
+The primary manifest expands to:
 
-## Dataset Preparation
+- 4 non-replay strategies × 2 scenarios = 8 runs;
+- 2 replay variants × 3 budgets × 2 scenarios = 12 runs;
+- 2 oracle runs.
 
-### Step 1: Obtain Raw Dataset
-
-Download your raw dataset CSV file. For CICIDS2017, you can obtain it from:
-
-[![UNB: CIC-IDS2017](https://img.shields.io/badge/UNB-CIC--IDS2017-red)](https://www.unb.ca/cic/datasets/ids-2017.html)
-
-### Step 2: Place Raw CSV Files
-
-Place your raw CSV file in the appropriate directory:
+## 5. Run the primary EAAI experiments
 
 ```bash
-preprocess_csv/
-└── CICIDS2017/
-    └── CICIDS2017_full.csv    # Your raw CSV file
- 
+uv run python scripts/run_experiments.py \
+  --manifest configs/experiments/eaai-primary.yaml
 ```
 
-### Step 3: Run Preprocessing Script
-
-The `tab-preprocessing.py` script will:
-1. Load class names from `configs/config.yaml`
-2. Read your raw CSV file
-3. Clean data (remove infinity and NaN values)
-4. Split into train/validation/test sets (60/20/20 split)
-5. Save processed `.npy` files
-
-**For CICIDS2017:**
-```bash
-# Edit tab-preprocessing.py to set:
-# DATASET_NAME = 'CICIDS2017'
-# FOLDER_PATH = 'preprocess_csv/CICIDS2017/'
-# INPUT_FILE = 'CICIDS2017_standardised.csv'
-
-uv run python tab-preprocessing.py
-```
-
-**Output files will be saved to the same directory:**
-- `train.npy` - Training data
-- `val.npy` - Validation data  
-- `test.npy` - Test data
-- `class_names.npy` - Class labels
-
-### Step 4: Move Processed Files to Dataset Directory
-
-After preprocessing, move the `.npy` files to the dataset directory:
+Run only one configuration while checking a machine:
 
 ```bash
-# For CICIDS2017
-mkdir -p dataset/CICIDS2017
-mv preprocess_csv/CICIDS2017/*.npy dataset/CICIDS2017/
-
-# Don't forget to add catfeaturelist.npy manually
-# This contains indices of categorical features required by TabTransformer
+uv run python scripts/run_experiments.py \
+  --manifest configs/experiments/eaai-primary.yaml \
+  --only er_balanced_s1_b10
 ```
 
-### Required Files for Training
+Each run produces:
 
-Your dataset directory should contain:
-
-```
-dataset/
-└── CICIDS2017/
-    ├── train.npy              # Training data (Shape: samples, features+1)
-    ├── val.npy                # Validation data (Shape: samples, features+1)
-    ├── test.npy               # Test data (Shape: samples, features+1)
-    └── catfeaturelist.npy     # Indices of categorical features. This is required due to the TabTransformer architecture.
+```text
+results/runs/<run-id>/
+  run.log
+  run.json
 ```
 
-### Data Format
+`run.json` contains the resolved configuration, command, Git commit, host,
+timestamps, return code and parsed per-experience/final metrics.
 
-- **Input format**: NumPy arrays of shape `(num_samples, num_features + 1)`
-- **Last column**: Encoded class labels (integers starting from 0)
-- **Label encoding**: 
-  - **Class 0 = "Benign"** (must always be index 0)
-  - Classes 1-N = Attack classes (in order defined in config.yaml)
-- **Feature types**: 
-  - Categorical features: Raw tabular data. You need to manually identify categorical feature indices and create `catfeaturelist.npy`
-  - Continuous features: Raw tabular data
-
-### Final Preprocessing Pipeline (Internal)
-
-After loading the preprocessed `.npy` files, `src/data/preprocess.py` performs additional processing. This is executed via the `main.py` script:
-
-1. **Feature Separation**: Categorical and continuous features are separated based on `catfeaturelist.npy`
-2. **Normalization**: Continuous features are normalized using `StandardScaler`
-   - Training set: Fit and transform
-   - Val/Test sets: Transform only (using training scaler)
-3. **Vocabulary Calculation**: For categorical features, vocabulary sizes are computed
-4. **Stratified Splitting**: Train/validation splits are stratified per-class
-
-
-### Supported Datasets 
-[![UNB: CIC-IDS2017](https://img.shields.io/badge/UNB-CIC--IDS2017-red)](https://www.unb.ca/cic/datasets/ids-2017.html)
-
-Currently configured for flow-based dataset such as:
-- **CICIDS2017** (8 classes: 1 Benign + 7 Attack types) 
-
-**Class mapping (config.yaml):**
-```yaml
-classes:
-    - 'Benign'           # 0
-    - 'DoS GoldenEye'    # 1
-    - 'DoS Hulk'         # 2
-    - 'DoS Slowhttptest' # 3
-    - 'DoS slowloris'    # 4
-    - 'FTP-Patator'      # 5
-    - 'Heartbleed'       # 6
-    - 'SSH-Patator'      # 7
-```
-
-To add new datasets, update `config.yaml` with class names and prepare data in the required format.
-
-## Configuration
-
-All configuration parameters are defined in `configs/config.yaml`. Edit this file to customize your experiments.
-
-### Training Configuration
-
-```yaml
-# Training hyperparameters. This is just an example. Tune accordingly.
-batch_size: 256          # Batch size for training
-epochs: 100              # Maximum epochs per experience
-learning_rate: 0.001     # Initial learning rate (AdamW)
-
-# Dataset configuration
-datasets:
-    CICIDS2017:
-        num_class: 8
-        classes:
-            - 'Benign'
-            - 'DoS GoldenEye'
-            - 'DoS Hulk'
-            - 'DoS Slowhttptest'
-            - 'DoS slowloris'
-            - 'FTP-Patator'
-            - 'Heartbleed'
-            - 'SSH-Patator'
-```
-
-**Training Details:**
-- **Optimizer**: AdamW with weight decay 1e-2
-- **Scheduler**: CosineAnnealingLR (T_max = num_epochs, eta_min = 1e-6)
-- **Early Stopping**: Patience = 10 epochs (based on validation loss)
-- **Loss Function**: CrossEntropyLoss
-
-### Model Configuration
-
-[![GitHub Repo](https://img.shields.io/badge/GitHub-lucidrains%2Ftab--transformer--pytorch-blue?logo=github)](https://github.com/lucidrains/tab-transformer-pytorch)
-
-We utilize the TabTransformer implementation from the above repository. Model hyperparameters are configured in `configs/config.yaml`:
-
-```yaml
-model:
-    dim: 32              # Embedding dimension
-    depth: 6             # Number of transformer layers
-    heads: 10            # Number of attention heads
-    attn_dropout: 0.1    # Attention dropout rate
-    ff_dropout: 0.1      # Feed-forward dropout rate
-    dim_out: 2           # Initial output classes (auto-expanded)
-```
-
-## Usage
-
-### Basic Commands
-
-#### 0. Log in to Weights & Biases
-
-Get your api key from your wandb account. Refer to this link: https://wandb.ai/authorize
-```bash
-wandb login
-
-# Insert the api key from your wandb account
-```
-
-#### 1. Naive (No Replay) - Baseline with CIIL Scenario
+After the primary matrix completes, turn those run artifacts into the same
+three-input schema used by the paper builder:
 
 ```bash
-uv run main.py --scenario 2
+uv run python analysis/export_run_summaries.py
+uv run python analysis/build_paper_results.py \
+  --primary results/rerun-primary \
+  --output results/rerun-generated
+uv run python analysis/plot_paper_results.py \
+  --tables-dir results/rerun-generated \
+  --output-dir results/rerun-generated/figures
 ```
 
+This keeps a rerun separate from the immutable EAAI-reported reference bundle.
 
-#### 2. Experience Replay - Main Strategy with CIIL Scenario
+## 6. Run the replay-buffer attacks
 
 ```bash
-# Basic ER with 10% memory
-uv run main.py --er --mem 10 --scenario 2
-
-# ER with different memory budgets
-uv run main.py --er --mem 5 --scenario 2   # 5% memory
-
-# Balanced sampling (equal samples per class)
-uv run main.py --er --mem 10 --scenario 2 --balanced True
+uv run python scripts/run_experiments.py \
+  --manifest configs/experiments/eaai-attacks.yaml
 ```
 
-#### 3. Oracle Training - Upper Bound
+The label-flip experiment varies the per-class buffer budget over 1%, 5% and
+10%, while flipping 100% of admitted exemplars. The backdoor experiment uses a
+10% replay buffer and varies the percentage of benign samples carrying the IAT
+trigger over 1%, 5% and 10%.
+
+The raw historical logs behind EAAI Table 12 are versioned under
+`results/eaai-reported/asr-logs/`. Three historical ASR estimates exceed 100%
+because the original evaluation reused mutated test objects and because very
+small injected sets magnified baseline variance. They are retained and flagged
+for provenance. Corrected reruns must be stored separately and must not overwrite
+the paper-reported artifacts.
+
+## 7. Reproduce the cross-architecture benchmark
+
+Tables 13-14 use an independent pipeline:
 
 ```bash
-uv run main.py --er --mem 10 --scenario 2 --oracle --seed 42
+cd benchmarks/cross_architecture
+uv sync --frozen
+uv run python src/data_prep.py
+uv run python src/run.py \
+  --protocols ci cii \
+  --models mlp cnn ftt \
+  --strategies naive replay ewc lwf icarl \
+  --epochs 5 --gpu 0
 ```
 
-**Oracle training:**
-- For each experience j, train a new model on concatenated data from experiences 0..j
-- Provides upper-bound performance (joint training). Act as baseline without any CL method.
-- Used to compute **intransigence** metric
+This benchmark caps majority-class training samples and treats all features as
+continuous. It tests whether the CI/CII pattern generalises across backbones; its
+values are not intended to equal the primary TabTransformer results.
 
-### Command-Line Arguments
+## 8. Generate and verify the EAAI result bundle
 
-| Argument | Type | Default | Description |
-|----------|------|---------|-------------|
-| `--er` | flag | False | Enable Experience Replay strategy |
-| `--mem` | int | 10 | Memory percentage (e.g., 10 for 10%). --er must be enabled. |
-| `--scenario` | int | 1 | Scenario type: 1=CI, 2=CIIL |
-| `--balanced` | str | 'False' | Balanced sampling ('True'/'False') |
-| `--seed` | int | 42 | Random seed for reproducibility |
-| `--learning_rate` | float | from config | Override learning rate |
-| `--oracle` | flag | False | Compute oracle performance |
-
-## Evaluation Metrics
-
-The following metrics are computed to evaluate continual learning performance:
-
-### Per-Experience Metrics
-- **Accuracy**: Overall classification accuracy on test set
-- **Macro F1-Score**: Macro-averaged F1-score across all classes
-- **Forgetting**: Performance degradation on previous experiences
-- **Forward Transfer (FWT)**: Zero-shot performance on new classes before training
-- **Backward Transfer (BWT)**: Average change in performance on previous tasks
-- **Intransigence**: Gap between continual learning and oracle (upper-bound) performance
-
-### Overall Metrics
-Computed after all experiences:
-- **Overall Accuracy**: Average accuracy across all experiences
-- **Overall Macro F1**: Average F1-score across all experiences
-- **Overall BWT**: Average backward transfer across all previous tasks
-- **Overall FWT**: Average forward transfer across all new tasks
-- **Overall Intransigence**: Average gap from oracle performance
-
-All metrics are automatically logged to **Weights & Biases** for visualization and comparison.
-
-
-## Weights & Biases Logging
-
-All experiments are automatically logged to Weights & Biases for tracking and visualization. Metrics are organized in the following hierarchy:
-
-### Training Metrics (Per Experience)
-```
-Training/
-  ├── exp_{id}/train_loss    # Training loss per epoch
-  ├── exp_{id}/val_loss      # Validation loss per epoch
-  └── exp_{id}/lr            # Learning rate schedule
+```bash
+uv run python analysis/build_paper_results.py
+uv run python analysis/plot_paper_results.py
+uv run python analysis/verify_eaai_mapping.py
 ```
 
-### Experience-Level Metrics
-```
-exp/
-  ├── {id}/acc                     # Test accuracy
-  ├── {id}/macro_f1                # Macro F1-score
-  ├── {id}/forgetting_acc          # Forgetting on previous tasks
-  ├── {id}/forgetting_macro_f1     # F1 forgetting
-  ├── {id}/bwt_avg_so_far_acc      # Backward transfer (average so far)
-  ├── {id}/fwt_zero_shot_acc       # Forward transfer (zero-shot)
-  └── {id}/intransigence_acc       # Intransigence (if oracle enabled)
-```
+Generated outputs are written under `results/generated/`:
 
-### Overall Metrics (After All Experiences)
-```
-overall/
-  ├── acc                      # Overall accuracy
-  ├── macro_f1                 # Overall macro F1-score
-  ├── bwt_acc                  # Overall backward transfer
-  ├── fwt_acc                  # Overall forward transfer
-  ├── intransigence_acc        # Overall intransigence (if oracle enabled)
-  └── {id}/conf_mat            # Confusion matrix per experience
+```text
+table06_ci.csv
+table07_cii_checkpoint_average.csv
+table08_cii_final.csv
+table09_forgetting_intransigence.csv
+table10_label_flip.csv
+table11_backdoor.csv
+table12_backdoor_asr_historical.csv
+table13_cross_architecture_ci.csv
+table14_cross_architecture_cii.csv
+RESULTS_REFERENCE.md
+verification.json
+figures/figure04_distribution.svg
+figures/figure07_results.svg
+figures/figure08_results.svg
+figures/figure09_backdoor.svg
+figures/figure10_cross_architecture.svg
 ```
 
-## CI/CD
+The generated directory is intentionally ignored. The released inputs and EAAI
+contract are versioned, so anyone can regenerate and compare it.
 
-This repository uses GitHub Actions for continuous integration and deployment:
+## EAAI result map
 
-- **CI Pipeline**: Automated linting, formatting checks, and type checking
-- **Unit Tests**: 60 tests with 87% coverage, runs on every push and pull request
-- **Security Scanning**: Weekly dependency vulnerability checks with Safety and Bandit
-- **Documentation**: Markdown linting and link validation
-- **Releases**: Automated changelog generation and GitHub releases
+| Paper output | Repository artifact |
+|---|---|
+| Table 2 | `configs/data/features.yaml` |
+| Table 3 | `dataset/CICIDS2017/data_report.json` |
+| Table 4 | `src/data/ci_builder.py` |
+| Table 5 | `configs/config.yaml` + manifests |
+| Table 6 | `table06_ci.csv` |
+| Table 7 | `table07_cii_checkpoint_average.csv` |
+| Table 8 | `table08_cii_final.csv` |
+| Table 9 | `table09_forgetting_intransigence.csv` |
+| Table 10 | `table10_label_flip.csv` |
+| Table 11 | `table11_backdoor.csv` |
+| Table 12 | `table12_backdoor_asr_historical.csv` + raw logs |
+| Tables 13-14 | Cross-architecture summary CSVs |
+| Figures 7-10 | Generated from Tables 6-7, 11 and 13-14 |
 
-All workflows are configured in `.github/workflows/` and run automatically on push to `main` or `develop` branches.
+See [PAPER_MAP.md](docs/PAPER_MAP.md) for the complete mapping, including
+conceptual figures and known limitations.
 
-## License
+## Direct CLI examples
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```bash
+# Naive CI
+WANDB_MODE=disabled uv run python main.py --scenario 1 --seed 42
 
+# EWC / LwF / iCaRL
+WANDB_MODE=disabled uv run python main.py --ewc --scenario 1 --seed 42
+WANDB_MODE=disabled uv run python main.py --lwf --scenario 1 --seed 42
+WANDB_MODE=disabled uv run python main.py --icarl --scenario 1 --seed 42
 
-## Contact
+# ER-Stratified and ER-Balanced
+WANDB_MODE=disabled uv run python main.py --er --mem 10 --scenario 1 --seed 42
+WANDB_MODE=disabled uv run python main.py --er --balanced True --mem 10 --scenario 1 --seed 42
 
-For questions or issues, please open an issue on GitHub.
+# Label flipping: 10% buffer, every stored exemplar flipped
+WANDB_MODE=disabled uv run python main.py --er --balanced True --mem 10 \
+  --scenario 1 --lf --poison_rate 100 --seed 42
 
----
+# Historical backdoor configuration
+WANDB_MODE=disabled uv run python main.py --er --balanced True --mem 10 \
+  --scenario 1 --mp --poison_rate 10 --seed 42
+```
 
+### Primary CLI reference
 
+| Argument | Default | Meaning |
+|---|---:|---|
+| `--er` | off | Use experience replay; without a strategy flag the run is Naive |
+| `--ewc` | off | Use Elastic Weight Consolidation |
+| `--ewc-lambda` | `1000` | EWC quadratic penalty weight |
+| `--lwf` | off | Use Learning without Forgetting |
+| `--lwf-alpha` | `0.5` | LwF distillation-loss weight |
+| `--lwf-T` | `2.0` | LwF distillation temperature |
+| `--icarl` | off | Use iCaRL |
+| `--icarl-memory` | `2000` | Fixed total iCaRL exemplar budget |
+| `--mem` | `10` | ER per-class memory percentage |
+| `--balanced` | `False` | Use benign-anchored balanced ER (`True` or `False`) |
+| `--scenario` | `1` | `1` for CI; `2` for CII |
+| `--dataset` | `CICIDS2017` | Dataset directory/config key |
+| `--lf` | off | Apply label flipping to the replay buffer |
+| `--mp` | off | Apply the timing-feature backdoor to the replay buffer |
+| `--poison_rate` | `0` | Percentage of admitted buffer samples poisoned |
+| `--seed` | `42` | Python, NumPy and PyTorch random seed |
+| `--learning_rate` | config value | Override `configs/config.yaml` learning rate |
+| `--oracle` | off | Train jointly on all experiences |
+
+`--er`, `--ewc`, `--lwf` and `--icarl` are mutually exclusive. `--lf` and
+`--mp` are also mutually exclusive and the official attack manifests combine
+either attack with ER-Balanced. Prefer the manifests for paper replication;
+direct flags are mainly useful for a single diagnostic run.
+
+## Testing
+
+```bash
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
+```
+
+The test suite uses synthetic arrays and does not require CICIDS2017.
+
+## Reproducibility expectations
+
+- Seed 42 is the paper-replication seed.
+- CUDA kernels, drivers and GPU models can produce small numerical differences.
+- Compare within the tolerances documented in the paper contract rather than
+  expecting byte-identical checkpoints.
+- Table 5 describes a 100-epoch training cap with early stopping. The released
+  runs that produced the bundled values record an effective 8-epoch cap in
+  `configs/config.yaml`; this distinction is retained rather than silently
+  changing the historical run configuration.
+- The paper text describes dropping invalid flows and deduplication. The
+  released 1,138,612-row contract retains duplicates and replaces invalid
+  numeric values with zero. That executable historical policy is recorded in
+  `configs/data/cicids2017.yaml`; corrected preprocessing must be reported as a
+  separate experiment.
+- The CICIDS2017 Heartbleed class has only 11 total samples; its per-class metric
+  is inherently unstable.
+- W&B is an optional dashboard, never the sole result store.
+
+## Citation
+
+Please cite the accompanying paper when using ReplayIDS. A formal bibliographic
+entry will be added after publication.
+
+## Licence
+
+MIT License. See [LICENSE](LICENSE).
