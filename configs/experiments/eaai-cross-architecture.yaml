@@ -1,0 +1,18 @@
+schema_version: 1
+name: eaai-cross-architecture
+description: Independent benchmark reported in EAAI Tables 13-14 and Figure 10.
+runner: benchmarks/cross_architecture/src/run.py
+defaults:
+  protocols: [ci, cii]
+  models: [mlp, cnn, ftt]
+  strategies: [naive, replay, ewc, lwf, icarl]
+  epochs: 5
+  batch: 256
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  buffer_fraction: 0.10
+  ewc_lambda: 1000
+  lwf_alpha: 0.5
+  lwf_temperature: 2.0
+  icarl_memory: 2000
+  seed: 42

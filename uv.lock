@@ -221,75 +221,6 @@ wheels = [
 ]
 
 [[package]]
-name = "continual"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "avalanche-lib" },
-    { name = "kagglehub" },
-    { name = "numpy" },
-    { name = "pandas" },
-    { name = "plotly" },
-    { name = "pyyaml" },
-    { name = "ruff" },
-    { name = "scikit-learn" },
-    { name = "tab-transformer-pytorch" },
-    { name = "torch" },
-    { name = "torchaudio" },
-    { name = "torchinfo" },
-    { name = "torchsummary" },
-    { name = "torchvision" },
-    { name = "tqdm" },
-    { name = "wandb" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "bandit" },
-    { name = "ipykernel" },
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "pytest-mock" },
-    { name = "pytest-xdist" },
-    { name = "safety" },
-    { name = "tomli" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "avalanche-lib", specifier = ">=0.6.0" },
-    { name = "kagglehub", specifier = ">=0.3.13" },
-    { name = "numpy" },
-    { name = "pandas", specifier = ">=2.3.2" },
-    { name = "plotly", specifier = ">=6.3.0" },
-    { name = "pyyaml", specifier = ">=6.0.2" },
-    { name = "ruff", specifier = ">=0.14.9" },
-    { name = "scikit-learn" },
-    { name = "tab-transformer-pytorch", specifier = ">=0.4.2" },
-    { name = "torch", specifier = ">=2.6.0" },
-    { name = "torchaudio", specifier = ">=2.6.0" },
-    { name = "torchinfo", specifier = ">=1.8.0" },
-    { name = "torchsummary", specifier = ">=1.5.1" },
-    { name = "torchvision", specifier = ">=0.21.0" },
-    { name = "tqdm" },
-    { name = "wandb", specifier = ">=0.21.3" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "bandit", specifier = ">=1.9.3" },
-    { name = "ipykernel", specifier = ">=6.30.1" },
-    { name = "mypy", specifier = ">=1.19.1" },
-    { name = "pytest", specifier = ">=9.0.2" },
-    { name = "pytest-cov", specifier = ">=7.0.0" },
-    { name = "pytest-mock", specifier = ">=3.15.1" },
-    { name = "pytest-xdist", specifier = ">=3.8.0" },
-    { name = "safety", specifier = ">=3.7.0" },
-    { name = "tomli", specifier = ">=2.4.0" },
-]
-
-[[package]]
 name = "contourpy"
 version = "1.3.3"
 source = { registry = "https://pypi.org/simple" }
@@ -1821,6 +1752,75 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/77/69/c50a63842b6bd48850ebc7ab22d46e7a2a32d824ad6c605b218441814639/regex-2026.1.15-cp312-cp312-win32.whl", hash = "sha256:82345326b1d8d56afbe41d881fdf62f1926d7264b2fc1537f99ae5da9aad7913", size = 266279, upload-time = "2026-01-14T23:15:07.678Z" },
     { url = "https://files.pythonhosted.org/packages/f2/36/39d0b29d087e2b11fd8191e15e81cce1b635fcc845297c67f11d0d19274d/regex-2026.1.15-cp312-cp312-win_amd64.whl", hash = "sha256:4def140aa6156bc64ee9912383d4038f3fdd18fee03a6f222abd4de6357ce42a", size = 277166, upload-time = "2026-01-14T23:15:09.257Z" },
     { url = "https://files.pythonhosted.org/packages/28/32/5b8e476a12262748851fa8ab1b0be540360692325975b094e594dfebbb52/regex-2026.1.15-cp312-cp312-win_arm64.whl", hash = "sha256:c6c565d9a6e1a8d783c1948937ffc377dd5771e83bd56de8317c450a954d2056", size = 270415, upload-time = "2026-01-14T23:15:10.743Z" },
+]
+
+[[package]]
+name = "replayids"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "avalanche-lib" },
+    { name = "kagglehub" },
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "plotly" },
+    { name = "pyyaml" },
+    { name = "ruff" },
+    { name = "scikit-learn" },
+    { name = "tab-transformer-pytorch" },
+    { name = "torch" },
+    { name = "torchaudio" },
+    { name = "torchinfo" },
+    { name = "torchsummary" },
+    { name = "torchvision" },
+    { name = "tqdm" },
+    { name = "wandb" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "bandit" },
+    { name = "ipykernel" },
+    { name = "mypy" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "pytest-mock" },
+    { name = "pytest-xdist" },
+    { name = "safety" },
+    { name = "tomli" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "avalanche-lib", specifier = ">=0.6.0" },
+    { name = "kagglehub", specifier = ">=0.3.13" },
+    { name = "numpy" },
+    { name = "pandas", specifier = ">=2.3.2" },
+    { name = "plotly", specifier = ">=6.3.0" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "ruff", specifier = ">=0.14.9" },
+    { name = "scikit-learn" },
+    { name = "tab-transformer-pytorch", specifier = ">=0.4.2" },
+    { name = "torch", specifier = ">=2.6.0" },
+    { name = "torchaudio", specifier = ">=2.6.0" },
+    { name = "torchinfo", specifier = ">=1.8.0" },
+    { name = "torchsummary", specifier = ">=1.5.1" },
+    { name = "torchvision", specifier = ">=0.21.0" },
+    { name = "tqdm" },
+    { name = "wandb", specifier = ">=0.21.3" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "bandit", specifier = ">=1.9.3" },
+    { name = "ipykernel", specifier = ">=6.30.1" },
+    { name = "mypy", specifier = ">=1.19.1" },
+    { name = "pytest", specifier = ">=9.0.2" },
+    { name = "pytest-cov", specifier = ">=7.0.0" },
+    { name = "pytest-mock", specifier = ">=3.15.1" },
+    { name = "pytest-xdist", specifier = ">=3.8.0" },
+    { name = "safety", specifier = ">=3.7.0" },
+    { name = "tomli", specifier = ">=2.4.0" },
 ]
 
 [[package]]

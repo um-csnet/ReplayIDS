@@ -1,0 +1,699 @@
+
+=== Exp 0 | classes: [0, 1] ===
+Exp 0 | Epoch 1/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.22it/s]
+[Exp 0] Epoch 1: train_loss=0.012910  val_loss=0.004988
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 2/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.50it/s]
+[Exp 0] Epoch 2: train_loss=0.004432  val_loss=0.007157
+Exp 0 | Epoch 3/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.48it/s]
+[Exp 0] Epoch 3: train_loss=0.003262  val_loss=0.003421
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 4/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.28it/s]
+[Exp 0] Epoch 4: train_loss=0.002672  val_loss=0.001963
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 5/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.06it/s]
+[Exp 0] Epoch 5: train_loss=0.002274  val_loss=0.003901
+Exp 0 | Epoch 6/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.56it/s]
+[Exp 0] Epoch 6: train_loss=0.002051  val_loss=0.002366
+Exp 0 | Epoch 7/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [01:02<00:00, 33.22it/s]
+[Exp 0] Epoch 7: train_loss=0.001741  val_loss=0.001823
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 8/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [00:58<00:00, 35.22it/s]
+[Exp 0] Epoch 8: train_loss=0.001652  val_loss=0.001216
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 9/100: 100%|███████████████████████████████████████████████████████████| 2069/2069 [00:56<00:00, 36.80it/s]
+[Exp 0] Epoch 9: train_loss=0.001524  val_loss=0.001263
+Exp 0 | Epoch 10/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.55it/s]
+[Exp 0] Epoch 10: train_loss=0.001426  val_loss=0.001397
+Exp 0 | Epoch 11/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.87it/s]
+[Exp 0] Epoch 11: train_loss=0.001383  val_loss=0.001044
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 12/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.46it/s]
+[Exp 0] Epoch 12: train_loss=0.001277  val_loss=0.001144
+Exp 0 | Epoch 13/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:58<00:00, 35.15it/s]
+[Exp 0] Epoch 13: train_loss=0.001235  val_loss=0.001100
+Exp 0 | Epoch 14/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.77it/s]
+[Exp 0] Epoch 14: train_loss=0.001160  val_loss=0.001093
+Exp 0 | Epoch 15/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:58<00:00, 35.46it/s]
+[Exp 0] Epoch 15: train_loss=0.001143  val_loss=0.001045
+Exp 0 | Epoch 16/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.84it/s]
+[Exp 0] Epoch 16: train_loss=0.000930  val_loss=0.000854
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 17/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 33.97it/s]
+[Exp 0] Epoch 17: train_loss=0.000887  val_loss=0.000861
+Exp 0 | Epoch 18/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:56<00:00, 36.47it/s]
+[Exp 0] Epoch 18: train_loss=0.000867  val_loss=0.000840
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 19/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:58<00:00, 35.45it/s]
+[Exp 0] Epoch 19: train_loss=0.000850  val_loss=0.000826
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 20/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.60it/s]
+[Exp 0] Epoch 20: train_loss=0.000849  val_loss=0.000817
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 21/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.42it/s]
+[Exp 0] Epoch 21: train_loss=0.000831  val_loss=0.000802
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 22/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.83it/s]
+[Exp 0] Epoch 22: train_loss=0.000821  val_loss=0.000825
+Exp 0 | Epoch 23/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.91it/s]
+[Exp 0] Epoch 23: train_loss=0.000828  val_loss=0.000786
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 24/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.77it/s]
+[Exp 0] Epoch 24: train_loss=0.000807  val_loss=0.000826
+Exp 0 | Epoch 25/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [01:01<00:00, 33.72it/s]
+[Exp 0] Epoch 25: train_loss=0.000797  val_loss=0.000774
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 26/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:57<00:00, 35.92it/s]
+[Exp 0] Epoch 26: train_loss=0.000793  val_loss=0.000774
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 27/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.99it/s]
+[Exp 0] Epoch 27: train_loss=0.000801  val_loss=0.000836
+Exp 0 | Epoch 28/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.75it/s]
+[Exp 0] Epoch 28: train_loss=0.000788  val_loss=0.000766
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 29/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.72it/s]
+[Exp 0] Epoch 29: train_loss=0.000793  val_loss=0.000749
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 30/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.92it/s]
+[Exp 0] Epoch 30: train_loss=0.000789  val_loss=0.000778
+Exp 0 | Epoch 31/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:58<00:00, 35.62it/s]
+[Exp 0] Epoch 31: train_loss=0.000769  val_loss=0.000757
+Exp 0 | Epoch 32/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:59<00:00, 34.81it/s]
+[Exp 0] Epoch 32: train_loss=0.000762  val_loss=0.000741
+Model saved to model/CL_CICIDS2017_Exp_0.pth
+Exp 0 | Epoch 33/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.40it/s]
+[Exp 0] Epoch 33: train_loss=0.000768  val_loss=0.000776
+Exp 0 | Epoch 34/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.00it/s]
+[Exp 0] Epoch 34: train_loss=0.000762  val_loss=0.000750
+Exp 0 | Epoch 35/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:56<00:00, 36.66it/s]
+[Exp 0] Epoch 35: train_loss=0.000760  val_loss=0.000747
+Exp 0 | Epoch 36/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [00:57<00:00, 36.17it/s]
+[Exp 0] Epoch 36: train_loss=0.000756  val_loss=0.000760
+Exp 0 | Epoch 37/100: 100%|██████████████████████████████████████████████████████████| 2069/2069 [01:00<00:00, 34.46it/s]
+[Exp 0] Epoch 37: train_loss=0.000734  val_loss=0.000747
+[EarlyStop Exp 0] best_val=0.000741
+
+Rebuilding replay buffer with 5% of samples from all seen experiences...
+Applied model poisoning to 2647 samples (rate=10%).
+
+Final training replay buffer size: 26471
+Final training buffer class distribution:
+Class 0: 26163 samples
+Class 1: 308 samples
+
+Rebuilding validation replay buffer...
+
+Final validation replay buffer size: 8823
+Final validation buffer class distribution:
+Class 0: 8721 samples
+Class 1: 102 samples
+
+=== Exp 0 | Test on single experience with classes: [0, 1] ===
+
+--- Per-task classification report (only selected indices) ---
+
+               precision    recall  f1-score   support
+
+       Benign     0.9998    0.9999    0.9998    174421
+DoS GoldenEye     0.9917    0.9806    0.9861      2059
+
+     accuracy                         0.9997    176480
+    macro avg     0.9957    0.9902    0.9930    176480
+ weighted avg     0.9997    0.9997    0.9997    176480
+
+--- Confusion Matrix ---
+[[174404     17]
+ [    40   2019]]
+per-task acc: 0.999677017225748
+
+=== Exp 0 | Test on classes seen so far: [0, 1] ===
+
+--- Per-task classification report (only selected indices) ---
+
+               precision    recall  f1-score   support
+
+       Benign     0.9998    0.9999    0.9998    174421
+DoS GoldenEye     0.9917    0.9806    0.9861      2059
+
+     accuracy                         0.9997    176480
+    macro avg     0.9957    0.9902    0.9930    176480
+ weighted avg     0.9997    0.9997    0.9997    176480
+
+--- Confusion Matrix ---
+[[174404     17]
+ [    40   2019]]
+Completed experience 0 - Overall accuracy: 0.9997, Macro F1: 0.9930
+
+=== Exp 1 | classes: [2, 3] ===
+has_bias: True
+--- ER Strategy: Training with 26471 samples from replay buffer ---
+--- ER Strategy: Validating with 8823 samples from replay buffer ---
+Exp 1 | Epoch 1/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:21<00:00, 31.07it/s]
+[Exp 1] Epoch 1: train_loss=0.109602  val_loss=0.008391
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 2/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:30<00:00, 21.88it/s]
+[Exp 1] Epoch 2: train_loss=0.004645  val_loss=0.003504
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 3/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:23<00:00, 27.85it/s]
+[Exp 1] Epoch 3: train_loss=0.002457  val_loss=0.002475
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 4/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:22<00:00, 29.05it/s]
+[Exp 1] Epoch 4: train_loss=0.001544  val_loss=0.001906
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 5/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:23<00:00, 28.40it/s]
+[Exp 1] Epoch 5: train_loss=0.001093  val_loss=0.001544
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 6/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:20<00:00, 32.26it/s]
+[Exp 1] Epoch 6: train_loss=0.000883  val_loss=0.001075
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 7/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:24<00:00, 27.10it/s]
+[Exp 1] Epoch 7: train_loss=0.000761  val_loss=0.001005
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 8/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:22<00:00, 29.01it/s]
+[Exp 1] Epoch 8: train_loss=0.000651  val_loss=0.000974
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 9/100: 100%|█████████████████████████████████████████████████████████████| 658/658 [00:22<00:00, 29.61it/s]
+[Exp 1] Epoch 9: train_loss=0.000603  val_loss=0.001281
+Exp 1 | Epoch 10/100: 100%|████████████████████████████████████████████████████████████| 658/658 [00:20<00:00, 32.24it/s]
+[Exp 1] Epoch 10: train_loss=0.000536  val_loss=0.001304
+Exp 1 | Epoch 11/100: 100%|████████████████████████████████████████████████████████████| 658/658 [00:21<00:00, 30.59it/s]
+[Exp 1] Epoch 11: train_loss=0.000546  val_loss=0.000890
+Model saved to model/CL_CICIDS2017_Exp_1.pth
+Exp 1 | Epoch 12/100: 100%|████████████████████████████████████████████████████████████| 658/658 [00:21<00:00, 30.14it/s]
+[Exp 1] Epoch 12: train_loss=0.000455  val_loss=0.001752
+Exp 1 | Epoch 13/100: 100%|████████████████████████████████████████████████████████████| 658/658 [00:23<00:00, 28.39it/s]
+[Exp 1] Epoch 13: train_loss=0.000437  val_loss=0.001261
+Exp 1 | Epoch 14/100: 100%|████████████████████████████████████████████████████████████| 658/658 [00:22<00:00, 29.50it/s]
+[Exp 1] Epoch 14: train_loss=0.000438  val_loss=0.001168
+Exp 1 | Epoch 15/100: 100%|████████████████████████████████████████████████████████████| 658/658 [00:20<00:00, 31.44it/s]
+[Exp 1] Epoch 15: train_loss=0.000391  val_loss=0.000991
+Exp 1 | Epoch 16/100: 100%|████████████████████████████████████████████████████████████| 658/658 [00:20<00:00, 31.45it/s]
+[Exp 1] Epoch 16: train_loss=0.000295  val_loss=0.000978
+[EarlyStop Exp 1] best_val=0.000890
+
+Rebuilding replay buffer with 5% of samples from all seen experiences...
+Applied model poisoning to 3356 samples (rate=10%).
+
+Final training replay buffer size: 33567
+Final training buffer class distribution:
+Class 0: 26163 samples
+Class 1: 308 samples
+Class 2: 6932 samples
+Class 3: 164 samples
+
+Rebuilding validation replay buffer...
+
+Final validation replay buffer size: 11188
+Final validation buffer class distribution:
+Class 0: 8721 samples
+Class 1: 102 samples
+Class 2: 2310 samples
+Class 3: 55 samples
+Backdoor target class (non-benign): 3
+
+=== Exp 1 | Test on single experience with classes: [0, 1] ===
+
+--- Per-task classification report (only selected indices) ---
+
+               precision    recall  f1-score   support
+
+       Benign     0.9997    0.9997    0.9997    174421
+DoS GoldenEye     0.9805    0.9777    0.9791      2059
+
+    accuracy     0.9995    0.9994    0.9995    176480
+    macro avg     0.9901    0.9887    0.9894    176480
+ weighted avg     0.9995    0.9994    0.9995    176480
+
+--- Confusion Matrix ---
+[[174361     40     19      1]
+ [    46   2013      0      0]
+ [     0      0      0      0]
+ [     0      0      0      0]]
+per-task acc: 0.9994559981866606
+
+=== Exp 1 | Test on single experience with classes: [2, 3] ===
+Injected backdoor into 110 samples of class 3 in single test
+
+--- Per-task classification report (only selected indices) ---
+
+                  precision    recall  f1-score   support
+
+        DoS Hulk     1.0000    0.9999    1.0000     46215
+DoS Slowhttptest     0.9970    0.9036    0.9480      1100
+
+       accuracy     0.9999    0.9977    0.9988     47315
+       macro avg     0.9985    0.9518    0.9740     47315
+    weighted avg     0.9999    0.9977    0.9988     47315
+
+--- Confusion Matrix ---
+[[    0     0     0]
+ [    0 46212     3]
+ [  106     0   994]]
+per-task acc: 0.998815115737802
+
+=== Exp 1 | Test on classes seen so far: [0, 1, 2, 3] ===
+
+--- Per-task classification report (only selected indices) ---
+
+                  precision    recall  f1-score   support
+
+          Benign     0.9991    0.9997    0.9994    174421
+   DoS GoldenEye     0.9805    0.9777    0.9791      2059
+        DoS Hulk     0.9996    0.9999    0.9998     46215
+DoS Slowhttptest     0.9960    0.9036    0.9476      1100
+
+        accuracy                         0.9990    223795
+       macro avg     0.9938    0.9702    0.9815    223795
+    weighted avg     0.9990    0.9990    0.9990    223795
+
+--- Confusion Matrix ---
+[[174361     40     19      1]
+ [    46   2013      0      0]
+ [     0      0  46212      3]
+ [   106      0      0    994]]
+Completed experience 1 - Overall accuracy: 0.9990, Macro F1: 0.9815
+
+=== Exp 2 | classes: [4, 5] ===
+has_bias: True
+--- ER Strategy: Training with 33567 samples from replay buffer ---
+--- ER Strategy: Validating with 11188 samples from replay buffer ---
+Exp 2 | Epoch 1/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:07<00:00, 22.62it/s]
+[Exp 2] Epoch 1: train_loss=0.330932  val_loss=0.077859
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 2/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 30.42it/s]
+[Exp 2] Epoch 2: train_loss=0.049887  val_loss=0.032558
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 3/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 31.36it/s]
+[Exp 2] Epoch 3: train_loss=0.023446  val_loss=0.018688
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 4/100: 100%|█████████████████████████████████████████████████████████| 164/164 [-1:59:58<00:00, -66.49it/s]
+[Exp 2] Epoch 4: train_loss=0.014507  val_loss=0.013285
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 5/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 31.26it/s]
+[Exp 2] Epoch 5: train_loss=0.010483  val_loss=0.011120
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 6/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 31.13it/s]
+[Exp 2] Epoch 6: train_loss=0.008330  val_loss=0.009213
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 7/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 30.99it/s]
+[Exp 2] Epoch 7: train_loss=0.007027  val_loss=0.008437
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 8/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 31.44it/s]
+[Exp 2] Epoch 8: train_loss=0.006165  val_loss=0.007319
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 9/100: 100%|█████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 32.44it/s]
+[Exp 2] Epoch 9: train_loss=0.005441  val_loss=0.007449
+Exp 2 | Epoch 10/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:08<00:00, 20.21it/s]
+[Exp 2] Epoch 10: train_loss=0.004669  val_loss=0.006312
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 11/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 30.83it/s]
+[Exp 2] Epoch 11: train_loss=0.003975  val_loss=0.007088
+Exp 2 | Epoch 12/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 29.95it/s]
+[Exp 2] Epoch 12: train_loss=0.003743  val_loss=0.005864
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 13/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 30.27it/s]
+[Exp 2] Epoch 13: train_loss=0.003345  val_loss=0.005498
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 14/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 31.51it/s]
+[Exp 2] Epoch 14: train_loss=0.003203  val_loss=0.005217
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 15/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:08<00:00, 20.16it/s]
+[Exp 2] Epoch 15: train_loss=0.002838  val_loss=0.005487
+Exp 2 | Epoch 16/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 30.86it/s]
+[Exp 2] Epoch 16: train_loss=0.002791  val_loss=0.004734
+Model saved to model/CL_CICIDS2017_Exp_2.pth
+Exp 2 | Epoch 17/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 30.45it/s]
+[Exp 2] Epoch 17: train_loss=0.002569  val_loss=0.005067
+Exp 2 | Epoch 18/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 31.38it/s]
+[Exp 2] Epoch 18: train_loss=0.002343  val_loss=0.005477
+Exp 2 | Epoch 19/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 30.65it/s]
+[Exp 2] Epoch 19: train_loss=0.002211  val_loss=0.005382
+Exp 2 | Epoch 20/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:07<00:00, 20.79it/s]
+[Exp 2] Epoch 20: train_loss=0.002244  val_loss=0.005188
+Exp 2 | Epoch 21/100: 100%|████████████████████████████████████████████████████████████| 164/164 [00:05<00:00, 29.56it/s]
+[Exp 2] Epoch 21: train_loss=0.001840  val_loss=0.004878
+[EarlyStop Exp 2] best_val=0.004734
+
+Rebuilding replay buffer with 5% of samples from all seen experiences...
+Applied model poisoning to 3397 samples (rate=10%).
+
+Final training replay buffer size: 33978
+Final training buffer class distribution:
+Class 0: 26163 samples
+Class 1: 308 samples
+Class 2: 6932 samples
+Class 3: 164 samples
+Class 4: 173 samples
+Class 5: 238 samples
+
+Rebuilding validation replay buffer...
+
+Final validation replay buffer size: 11325
+Final validation buffer class distribution:
+Class 0: 8721 samples
+Class 1: 102 samples
+Class 2: 2310 samples
+Class 3: 55 samples
+Class 4: 58 samples
+Class 5: 79 samples
+Backdoor target class (non-benign): 1
+
+=== Exp 2 | Test on single experience with classes: [0, 1] ===
+Injected backdoor into 205 samples of class 1 in single test
+
+--- Per-task classification report (only selected indices) ---
+
+               precision    recall  f1-score   support
+
+       Benign     0.9986    0.9996    0.9991    174421
+DoS GoldenEye     0.9748    0.8815    0.9258      2059
+
+    accuracy     0.9984    0.9982    0.9983    176480
+    macro avg     0.9867    0.9406    0.9624    176480
+ weighted avg     0.9983    0.9982    0.9983    176480
+
+--- Confusion Matrix ---
+[[174355     47     17      2]
+ [   244   1815      0      0]
+ [     0      0      0      0]
+ [     0      0      0      0]]
+per-task acc: 0.9982971658152495
+
+=== Exp 2 | Test on single experience with classes: [2, 3] ===
+
+--- Per-task classification report (only selected indices) ---
+
+                  precision    recall  f1-score   support
+
+        DoS Hulk     0.9998    0.9998    0.9998     46215
+DoS Slowhttptest     1.0000    0.8936    0.9438      1100
+
+       accuracy     0.9998    0.9973    0.9986     47315
+       macro avg     0.9999    0.9467    0.9718     47315
+    weighted avg     0.9998    0.9973    0.9985     47315
+
+--- Confusion Matrix ---
+[[    0     0     0     0     0]
+ [    2 46206     0     2     5]
+ [  106    11   983     0     0]
+ [    0     0     0     0     0]
+ [    0     0     0     0     0]]
+per-task acc: 0.998550494630482
+
+=== Exp 2 | Test on single experience with classes: [4, 5] ===
+
+--- Per-task classification report (only selected indices) ---
+
+               precision    recall  f1-score   support
+
+DoS slowloris     0.9974    0.9974    0.9974      1159
+  FTP-Patator     1.0000    0.9981    0.9991      1588
+
+    accuracy     0.9989    0.9978    0.9984      2747
+    macro avg     0.9987    0.9978    0.9982      2747
+ weighted avg     0.9989    0.9978    0.9984      2747
+
+--- Confusion Matrix ---
+[[   0    0    0    0]
+ [   0    0    0    0]
+ [   2    1 1156    0]
+ [   0    0    3 1585]]
+per-task acc: 0.9983609542888363
+
+=== Exp 2 | Test on classes seen so far: [0, 1, 2, 3, 4, 5] ===
+
+--- Per-task classification report (only selected indices) ---
+
+                  precision    recall  f1-score   support
+
+          Benign     0.9980    0.9996    0.9988    174421
+   DoS GoldenEye     0.9748    0.8815    0.9258      2059
+        DoS Hulk     0.9994    0.9998    0.9996     46215
+DoS Slowhttptest     1.0000    0.8936    0.9438      1100
+   DoS slowloris     0.9940    0.9974    0.9957      1159
+     FTP-Patator     0.9969    0.9981    0.9975      1588
+
+        accuracy                         0.9980    226542
+       macro avg     0.9938    0.9617    0.9769    226542
+    weighted avg     0.9980    0.9980    0.9980    226542
+
+--- Confusion Matrix ---
+[[174355     47     17      0      2      0]
+ [   244   1815      0      0      0      0]
+ [     2      0  46206      0      2      5]
+ [   106      0     11    983      0      0]
+ [     2      0      1      0   1156      0]
+ [     0      0      0      0      3   1585]]
+Completed experience 2 - Overall accuracy: 0.9980, Macro F1: 0.9769
+
+=== Exp 3 | classes: [6, 7] ===
+has_bias: True
+--- ER Strategy: Training with 33978 samples from replay buffer ---
+--- ER Strategy: Validating with 11325 samples from replay buffer ---
+Exp 3 | Epoch 1/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:06<00:00, 22.89it/s]
+[Exp 3] Epoch 1: train_loss=0.539054  val_loss=0.075760
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 2/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:07<00:00, 18.74it/s]
+[Exp 3] Epoch 2: train_loss=0.049243  val_loss=0.030920
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 3/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 29.90it/s]
+[Exp 3] Epoch 3: train_loss=0.025044  val_loss=0.019711
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 4/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 29.29it/s]
+[Exp 3] Epoch 4: train_loss=0.016952  val_loss=0.015009
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 5/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.40it/s]
+[Exp 3] Epoch 5: train_loss=0.012715  val_loss=0.012327
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 6/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.41it/s]
+[Exp 3] Epoch 6: train_loss=0.009937  val_loss=0.010325
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 7/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:07<00:00, 19.44it/s]
+[Exp 3] Epoch 7: train_loss=0.007959  val_loss=0.008591
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 8/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.65it/s]
+[Exp 3] Epoch 8: train_loss=0.006589  val_loss=0.007727
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 9/100: 100%|█████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.42it/s]
+[Exp 3] Epoch 9: train_loss=0.005441  val_loss=0.007070
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 10/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.37it/s]
+[Exp 3] Epoch 10: train_loss=0.004707  val_loss=0.006265
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 11/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 29.29it/s]
+[Exp 3] Epoch 11: train_loss=0.004096  val_loss=0.005632
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 12/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.60it/s]
+[Exp 3] Epoch 12: train_loss=0.003555  val_loss=0.005505
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 13/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:07<00:00, 19.51it/s]
+[Exp 3] Epoch 13: train_loss=0.003191  val_loss=0.005382
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 14/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 27.90it/s]
+[Exp 3] Epoch 14: train_loss=0.002885  val_loss=0.004876
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 15/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 27.90it/s]
+[Exp 3] Epoch 15: train_loss=0.002473  val_loss=0.004374
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 16/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 28.60it/s]
+[Exp 3] Epoch 16: train_loss=0.002437  val_loss=0.004740
+Exp 3 | Epoch 17/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 29.09it/s]
+[Exp 3] Epoch 17: train_loss=0.002137  val_loss=0.004461
+Exp 3 | Epoch 18/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 25.08it/s]
+[Exp 3] Epoch 18: train_loss=0.002047  val_loss=0.004505
+Exp 3 | Epoch 19/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 28.84it/s]
+[Exp 3] Epoch 19: train_loss=0.001896  val_loss=0.003728
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 20/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 28.65it/s]
+[Exp 3] Epoch 20: train_loss=0.001716  val_loss=0.004313
+Exp 3 | Epoch 21/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 29.71it/s]
+[Exp 3] Epoch 21: train_loss=0.001662  val_loss=0.003988
+Exp 3 | Epoch 22/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.69it/s]
+[Exp 3] Epoch 22: train_loss=0.001499  val_loss=0.004818
+Exp 3 | Epoch 23/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:06<00:00, 22.20it/s]
+[Exp 3] Epoch 23: train_loss=0.001420  val_loss=0.003349
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 24/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 29.71it/s]
+[Exp 3] Epoch 24: train_loss=0.001429  val_loss=0.003389
+Exp 3 | Epoch 25/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 29.61it/s]
+[Exp 3] Epoch 25: train_loss=0.001157  val_loss=0.004562
+Exp 3 | Epoch 26/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.36it/s]
+[Exp 3] Epoch 26: train_loss=0.001247  val_loss=0.003098
+Model saved to model/CL_CICIDS2017_Exp_3.pth
+Exp 3 | Epoch 27/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 29.88it/s]
+[Exp 3] Epoch 27: train_loss=0.001190  val_loss=0.003565
+Exp 3 | Epoch 28/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:04<00:00, 30.32it/s]
+[Exp 3] Epoch 28: train_loss=0.001073  val_loss=0.003726
+Exp 3 | Epoch 29/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:07<00:00, 19.63it/s]
+[Exp 3] Epoch 29: train_loss=0.001142  val_loss=0.003258
+Exp 3 | Epoch 30/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 29.07it/s]
+[Exp 3] Epoch 30: train_loss=0.001046  val_loss=0.003724
+Exp 3 | Epoch 31/100: 100%|████████████████████████████████████████████████████████████| 147/147 [00:05<00:00, 29.20it/s]
+[Exp 3] Epoch 31: train_loss=0.000974  val_loss=0.003236
+[EarlyStop Exp 3] best_val=0.003098
+
+Rebuilding replay buffer with 5% of samples from all seen experiences...
+Applied model poisoning to 3415 samples (rate=10%).
+
+Final training replay buffer size: 34159
+Final training buffer class distribution:
+Class 0: 26163 samples
+Class 1: 308 samples
+Class 2: 6932 samples
+Class 3: 164 samples
+Class 4: 173 samples
+Class 5: 238 samples
+Class 6: 5 samples
+Class 7: 176 samples
+
+Rebuilding validation replay buffer...
+
+Final validation replay buffer size: 11386
+Final validation buffer class distribution:
+Class 0: 8721 samples
+Class 1: 102 samples
+Class 2: 2310 samples
+Class 3: 55 samples
+Class 4: 58 samples
+Class 5: 79 samples
+Class 6: 2 samples
+Class 7: 59 samples
+Backdoor target class (non-benign): 2
+
+=== Exp 3 | Test on single experience with classes: [0, 1] ===
+
+--- Per-task classification report (only selected indices) ---
+
+               precision    recall  f1-score   support
+
+       Benign     0.9986    0.9995    0.9991    174421
+DoS GoldenEye     0.9691    0.8844    0.9248      2059
+
+    accuracy     0.9983    0.9982    0.9982    176480
+    macro avg     0.9839    0.9420    0.9620    176480
+ weighted avg     0.9983    0.9982    0.9982    176480
+
+--- Confusion Matrix ---
+[[174337     58     15      1      7      3]
+ [   238   1821      0      0      0      0]
+ [     0      0      0      0      0      0]
+ [     0      0      0      0      0      0]
+ [     0      0      0      0      0      0]
+ [     0      0      0      0      0      0]]
+per-task acc: 0.9982489643956094
+
+=== Exp 3 | Test on single experience with classes: [2, 3] ===
+Injected backdoor into 4621 samples of class 2 in single test
+
+--- Per-task classification report (only selected indices) ---
+
+                  precision    recall  f1-score   support
+
+        DoS Hulk     0.9998    0.8999    0.9472     46215
+DoS Slowhttptest     1.0000    0.8945    0.9443      1100
+
+       accuracy     0.9998    0.8998    0.9472     47315
+       macro avg     0.9999    0.8972    0.9458     47315
+    weighted avg     0.9998    0.8998    0.9472     47315
+
+--- Confusion Matrix ---
+[[    0     0     0]
+ [ 4625 41590     0]
+ [  106    10   984]]
+per-task acc: 0.9471518036908085
+
+=== Exp 3 | Test on single experience with classes: [4, 5] ===
+
+--- Per-task classification report (only selected indices) ---
+
+               precision    recall  f1-score   support
+
+DoS slowloris     0.9905    0.9914    0.9909      1159
+  FTP-Patator     1.0000    0.9893    0.9946      1588
+
+    accuracy     0.9960    0.9902    0.9931      2747
+    macro avg     0.9953    0.9903    0.9928      2747
+ weighted avg     0.9960    0.9902    0.9931      2747
+
+--- Confusion Matrix ---
+[[   0    0    0    0    0    0]
+ [   0    0    0    0    0    0]
+ [   0    0    0    0    0    0]
+ [   3    6    1 1149    0    0]
+ [   2    0    1   11 1571    3]
+ [   0    0    0    0    0    0]]
+per-task acc: 0.9930631617378606
+
+=== Exp 3 | Test on single experience with classes: [6, 7] ===
+
+--- Per-task classification report (only selected indices) ---
+
+              precision    recall  f1-score   support
+
+  Heartbleed     1.0000    1.0000    1.0000         2
+ SSH-Patator     1.0000    0.9983    0.9992      1179
+
+   accuracy     1.0000    0.9983    0.9992      1181
+   macro avg     1.0000    0.9992    0.9996      1181
+weighted avg     1.0000    0.9983    0.9992      1181
+
+--- Confusion Matrix ---
+[[   0    0    0]
+ [   0    2    0]
+ [   2    0 1177]]
+per-task acc: 0.9991525423728813
+
+=== Exp 3 | Test on classes seen so far: [0, 1, 2, 3, 4, 5, 6, 7] ===
+
+--- Per-task classification report (only selected indices) ---
+
+                  precision    recall  f1-score   support
+
+          Benign     0.9722    0.9995    0.9857    174421
+   DoS GoldenEye     0.9691    0.8844    0.9248      2059
+        DoS Hulk     0.9993    0.8999    0.9470     46215
+DoS Slowhttptest     0.9980    0.8945    0.9434      1100
+   DoS slowloris     0.9897    0.9914    0.9905      1159
+     FTP-Patator     1.0000    0.9893    0.9946      1588
+      Heartbleed     0.2222    1.0000    0.3636         2
+     SSH-Patator     0.9949    0.9983    0.9966      1179
+
+        accuracy                         0.9776    227723
+       macro avg     0.8932    0.9572    0.8933    227723
+    weighted avg     0.9782    0.9776    0.9772    227723
+
+--- Confusion Matrix ---
+[[174337     58     15      0      1      0      7      3]
+ [   238   1821      0      0      0      0      0      0]
+ [  4625      0  41590      0      0      0      0      0]
+ [   106      0     10    984      0      0      0      0]
+ [     3      0      6      1   1149      0      0      0]
+ [     2      0      0      1     11   1571      0      3]
+ [     0      0      0      0      0      0      2      0]
+ [     2      0      0      0      0      0      0   1177]]
+Completed experience 3 - Overall accuracy: 0.9776, Macro F1: 0.8933
+
+All experiences completed successfully!
+Final Accuracy Matrix (R[i,j] = acc on task j after training on task i):
+       0      1      2      3
+0 0.9997 0.0000 0.0000 0.0000
+1 0.9995 0.9988 0.0000 0.0000
+2 0.9983 0.9986 0.9984 0.0000
+3 0.9982 0.9472 0.9931 0.9992
+
+Final F1-Score Matrix (R[i,j] = F1 on task j after training on task i):
+       0      1      2      3
+0 0.9930 0.0000 0.0000 0.0000
+1 0.9894 0.9740 0.0000 0.0000
+2 0.9624 0.9718 0.9982 0.0000
+3 0.9620 0.9458 0.9928 0.9996
+
+Overall BWT (Accuracy): -0.0068
+Overall FWT (Accuracy): 0.0000 (Note: measures zero-shot acc on next task)
+
+Overall BWT (F1-Score): -0.0138
+Overall FWT (F1-Score): 0.0000 (Note: measures zero-shot F1 on next task)
+
+==================================================
+Logging final metrics to W&B...
+Done.

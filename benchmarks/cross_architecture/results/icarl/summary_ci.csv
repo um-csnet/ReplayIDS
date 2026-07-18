@@ -1,0 +1,4 @@
+model,strategy,overall_acc,macro_f1,avg_forget_acc,avg_forget_f1,intrans_acc,intrans_f1,oracle_acc
+mlp,icarl,0.7612,0.4576,0.1018,0.0501,0.2124,0.4375,0.9736
+cnn,icarl,0.8152,0.4745,0.0834,0.0230,0.1577,0.3710,0.9729
+ftt,icarl,0.7069,0.4517,0.1414,0.0748,0.2646,0.2932,0.9715

@@ -1,0 +1,20 @@
+schema_version: 1
+name: eaai-attacks
+description: Replay-buffer attacks reported in EAAI Tables 10-12.
+defaults:
+  scenario: 1
+  seed: 42
+  env:
+    WANDB_MODE: disabled
+runs:
+  # The paper varies buffer budget and flips every admitted exemplar.
+  - matrix:
+      strategy: [label_flip]
+      memory: [1, 5, 10]
+      poison_rate: [100]
+  # The historical backdoor implementation varies the percentage of benign
+  # buffer/test samples carrying the trigger while using a 10% replay buffer.
+  - matrix:
+      strategy: [backdoor]
+      memory: [10]
+      poison_rate: [1, 5, 10]

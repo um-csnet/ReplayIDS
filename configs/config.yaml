@@ -1,7 +1,7 @@
 # --- Base Settings ---
-batch_size: 128  # 256 best
-epochs: 1
-learning_rate: 0.001 # 0.0001 best for static lr
+batch_size: 256  # Azizi actual
+epochs: 8  # Azizi actual (early stop at peak)
+learning_rate: 0.0005 # Azizi actual
 
 datasets:
     CICIDS2017:
@@ -77,3 +77,31 @@ model:
     attn_dropout: 0.1    # Attention dropout rate
     ff_dropout: 0.1      # Feed-forward dropout rate
     dim_out: 2           # Initial output classes (auto-expanded)
+
+# Execution settings recorded in the EAAI paper contract. CLI flags may
+# override these without changing the scientific model configuration.
+training:
+    optimizer: adamw
+    weight_decay: 0.00001
+    scheduler: reduce_on_plateau
+    scheduler_factor: 0.1
+    scheduler_patience: 5
+    early_stop_patience: 10
+    num_workers: 8
+    seed: 42
+
+strategies:
+    ewc:
+        lambda: 1000.0
+        fisher_samples: 4096
+    lwf:
+        alpha: 0.5
+        temperature: 2.0
+    icarl:
+        exemplar_budget: 2000
+    er:
+        min_samples_per_class: 5
+
+oracle:
+    dim: 64
+    heads: 8
