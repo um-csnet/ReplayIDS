@@ -4,7 +4,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.6+-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-Self-reproducible implementation and EAAI artifact package for:
+Self-reproducible implementation and PeerJ artifact package for:
 
 > **Adaptive Intrusion Detection System using Transformer-Based Neural Networks
 > and Continual Learning Approach with Adversarial Investigation**
